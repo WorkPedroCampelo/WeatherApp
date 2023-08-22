@@ -1,0 +1,3 @@
+function caca(){
+    alert("caca");
+}
