@@ -24,10 +24,10 @@ fetch(apiUrl)
         temperatureMaxC=temperatureMaxC.toFixed(2);
 
 
-    weatherInfo.innerHTML= `Date: ${wheatherDate}<br>
-                            Summary: ${textOfTheDay}!! <br>          
-                            Min temp: ${temperatureMinC}°C<br>
-                            Max temp: ${temperatureMaxC}°C<br>`;
+    weatherInfo.innerHTML= `<span>Date: ${wheatherDate}<br></span>
+                            <span>Summary: ${textOfTheDay}!! <br>   </span>
+                            <span>Min temp: ${temperatureMinC}°C<br></span>
+                            <span>Max temp: ${temperatureMaxC}°C<br></span>`;
 
 })
 
