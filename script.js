@@ -5,6 +5,8 @@ const weatherInfo = document.getElementById('weatherInfo');
 
 const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/307772?apikey=bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN`;
 
+let city="  " ;
+
 fetch(apiUrl)
 .then(response => response.json())
 
@@ -55,6 +57,7 @@ fetch(apiUrl)
 
 
 
-  function caca(){
-    alert("caca");
+  function ChangeCity(){
+    city = prompt("Choose a city");
+
   }
