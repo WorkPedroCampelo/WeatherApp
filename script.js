@@ -1,11 +1,21 @@
 const apiKey = 'bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN';
 
-const locationInput= document.getElementById('LocationInput');
-const weatherInfo = document.getElementById('weatherInfo');
+let locationInput= document.getElementById('LocationInput');
+let weatherInfo = document.getElementById('weatherInfo');
 
-const apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/307772?apikey=bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN`;
+let locationKey="307772";//Está puesta para vigo, cambiar cuando se quiera poner otra ciudad
 
-let city="  " ;
+let apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/`+locationKey+`?apikey=bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN`;
+
+let city="" ;
+
+/*SUPONGO Q HAY Q HACER OTRO FETCH CON ESTA APIURL, A ELLA LE DAREMOS
+API KEY Y CIUDAD A BUSCAR, DE SU RESPUESTA ESCOGEMOS EL NÚMERO DE CIUDAD Y SE LO
+PONEMOS A LA VARIABLE locationKey (abría q actualizar el título donde pone la ciudad,
+  tambien estaría bn poner el país, dado q apareces siempre muchas opciones (eso se podría mejorar) )
+http://dataservice.accuweather.com/locations/v1/cities/search
+
+*/ 
 
 fetch(apiUrl)
 .then(response => response.json())
@@ -13,7 +23,7 @@ fetch(apiUrl)
 fetch(apiUrl)
 .then(response => response.json())
 .then(data => {
-    const weatherInfoContainer = document.getElementById("weather-info-container"); // Supongo que tienes un elemento contenedor con este ID
+    const weatherInfoContainer = document.getElementById("weather-info-container"); 
 
     data.DailyForecasts.forEach(forecast => {
         let weatherDate = forecast.Date.substring(0, 10);
@@ -23,8 +33,8 @@ fetch(apiUrl)
 
         let temperatureMinC = (temperatureMinF - 32) * 5 / 9;
         let temperatureMaxC = (temperatureMaxF - 32) * 5 / 9;
-        temperatureMinC = temperatureMinC.toFixed(2);
-        temperatureMaxC = temperatureMaxC.toFixed(2);
+        temperatureMinC = Math.round(temperatureMinC);
+        temperatureMaxC = Math.round(temperatureMaxC);
 
         let wheatherphoto = "sunny.png";
         if (textOfTheDay=="Intermittent clouds") {
@@ -58,6 +68,7 @@ fetch(apiUrl)
 
 
   function ChangeCity(){
-    city = prompt("Choose a city");
+    city = document.getElementById("LocationInput");
+    alert("Not working");
 
   }
