@@ -1,39 +1,44 @@
-
 const apiKey = 'bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN';
-
-let locationInput= document.getElementById('LocationInput');
 let weatherInfo = document.getElementById('weatherInfo');
 
-let locationKey="307772";//Está puesta para vigo, cambiar cuando se quiera poner otra ciudad
-
-let apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/`+locationKey+`?apikey=bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN`;
 
 setCity();
-
-/*SUPONGO Q HAY Q HACER OTRO FETCH CON ESTA APIURL, A ELLA LE DAREMOS
-API KEY Y CIUDAD A BUSCAR, DE SU RESPUESTA ESCOGEMOS EL NÚMERO DE CIUDAD Y SE LO
-PONEMOS A LA VARIABLE locationKey (abría q actualizar el título donde pone la ciudad,
-  tambien estaría bn poner el país, dado q apareces siempre muchas opciones (eso se podría mejorar) )
-http://dataservice.accuweather.com/locations/v1/cities/search
-
-*/ 
-function ChangeCity(locationInput) {
+ 
+function ChangeCity() {
+  let cityKey=0;
+  let locationInput= document.getElementById('LocationInput').value;
   let cityJson="http://dataservice.accuweather.com/locations/v1/cities/search?apikey=bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN&q="+locationInput;
   fetch(cityJson)
   .then(response => response.json())
-  .then(
-    data => {
-      data.Key// POR ACABAR
+  .then( data => {
+      cityKey=data[0].Key;
+      cityName=data[0].LocalizedName;
+      console.log(cityKey);
+      setCity(cityKey);
+      changeTittle(cityName);
     }
   )
+  .catch(error =>{
+      console.error("Error:" + error);
+      alert("city not found");
+    }
+  )
+
+}
+changeTittle(cityName);
+function changeTittle(){
+  document.getElementById("cityNameTitle").innerHTML=cityName;
 }
 
-function setCity(){
+
+function setCity(locationKey= 307772/*Este es el código de vigo*/){
+  let apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/`+locationKey+`?apikey=bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN`;
   fetch(apiUrl)
   .then(response => response.json())
   .then(data => {
+    
       const weatherInfoContainer = document.getElementById("weather-info-container"); 
-
+      weatherInfoContainer.innerHTML = "";
       data.DailyForecasts.forEach(forecast => {
           let weatherDate = forecast.Date.substring(0, 10);
           const textOfTheDay = forecast.Day.IconPhrase;
@@ -49,7 +54,7 @@ function setCity(){
           if (textOfTheDay=="Intermittent clouds") {
             wheatherphoto="sunAndClouds.png";
           }
-
+          
           const weatherInfo = document.createElement("div");
           weatherInfo.innerHTML = ` <div class="mt-5 flex" style="background-color: rgba(33, 231, 195, 0.363)">
                                       <div>
@@ -76,8 +81,4 @@ function setCity(){
 
 }
 
-  function ChangeCity(){
-    city = document.getElementById("LocationInput");
-    alert("Not working");
 
-  }
