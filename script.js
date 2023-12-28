@@ -1,3 +1,4 @@
+//API usada de accuweather
 const apiKey = 'bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN';
 let weatherInfo = document.getElementById('weatherInfo');
 
@@ -31,7 +32,7 @@ function changeTittle(){
 }
 
 
-function setCity(locationKey= 307772/*Este es el código de vigo*/){
+function setCity(locationKey= 307772/*Este es el código de Vigo*/){
   let apiUrl = `http://dataservice.accuweather.com/forecasts/v1/daily/5day/`+locationKey+`?apikey=bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN`;
   fetch(apiUrl)
   .then(response => response.json())
