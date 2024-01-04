@@ -2,7 +2,7 @@
 const apiKey = 'bCZgMSxcSgIIBXk5HleMwdgXefIQTrzN';
 let weatherInfo = document.getElementById('weatherInfo');
 
-let cityName=Vigo;// ciudad por defecto
+let cityName="Vigo";// ciudad por defecto
 
 setCity();
  
