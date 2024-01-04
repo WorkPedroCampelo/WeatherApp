@@ -78,7 +78,6 @@ function setCity(locationKey= 307772/*Este es el código de Vigo*/){
       
   .catch(error => {
       console.error('Error al obtener los datos:', error);
-      document.write('Error al obtener los datos');
     });
 
 }
