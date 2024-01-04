@@ -77,7 +77,7 @@ function setCity(locationKey= 307772/*Este es el código de Vigo*/){
       
   .catch(error => {
       console.error('Error al obtener los datos:', error);
-      weatherInfo.innerHTML = 'Error al obtener los datos';
+      document.write('Error al obtener los datos');
     });
 
 }
